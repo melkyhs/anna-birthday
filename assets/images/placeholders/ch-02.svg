@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE8D8"/>
+      <stop offset="1" stop-color="#FFF2D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#g2)"/>
+  <path d="M40 430C180 300 300 500 460 370C620 240 720 350 920 250" stroke="#E29AB6" stroke-width="16" stroke-linecap="round"/>
+  <text x="64" y="120" fill="#8A5B6D" font-family="Georgia, serif" font-size="68" font-weight="700">Timeline</text>
+</svg>

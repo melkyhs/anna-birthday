@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ringkasan Cerita</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Instrument Sans', 'sans-serif'],
+                        display: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            cream: '#fffaf9',
+                            sand: '#f9e8ee',
+                            peach: '#ffd9df',
+                            coral: '#eea7be',
+                            clay: '#db819f',
+                            ink: '#45383d',
+                            soft: '#8a747c',
+                            apricot: '#ffe0cf',
+                            butter: '#fff1d6',
+                            mint: '#dff2e9'
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 18px 40px rgba(161, 104, 128, 0.18)',
+                        card: '0 10px 24px rgba(161, 104, 128, 0.13)'
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-story-page="hub-summary" class="bg-brand-cream font-sans text-brand-ink antialiased selection:bg-brand-peach/50">
+    <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div class="absolute -left-24 -top-20 h-72 w-72 rounded-full bg-brand-peach/40 blur-3xl"></div>
+        <div class="absolute -right-28 top-1/3 h-96 w-96 rounded-full bg-brand-apricot/55 blur-3xl"></div>
+        <div class="absolute bottom-[-8rem] left-1/3 h-80 w-80 rounded-full bg-brand-mint/35 blur-3xl"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(47,36,31,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(47,36,31,0.04)_1px,transparent_1px)] bg-[size:34px_34px]"></div>
+    </div>
+
+    <div id="music-container" class="fixed right-4 top-4 z-50 sm:right-6 sm:top-6">
+        <button id="music-btn" type="button" aria-label="Putar musik latar" class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-3 py-2 text-xs font-bold uppercase tracking-wide text-brand-ink shadow-card backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white">
+            <span class="music-pill-icon grid h-6 w-6 place-items-center rounded-full bg-brand-peach/40 text-brand-clay">♫</span>
+            <span class="music-pill-text">Play soundtrack</span>
+        </button>
+        <audio id="bg-music" loop preload="auto">
+            <source src="../assets/audio/Lihat%20Kebunku%20(Taman%20Bunga)%20-%20Aku%20Jeje%20%20Lirik%20Lagu%20-%20Indolirik.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <main id="main-scrapbook" class="mx-auto w-full max-w-6xl px-4 pb-20 pt-24 sm:px-6 lg:px-8">
+        <header class="reveal rounded-[2rem] border border-white/70 bg-white/76 p-6 shadow-soft backdrop-blur-xl sm:p-8 lg:p-10">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <span class="rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-clay">Ringkasan</span>
+                <button data-unlock-next data-next-page="chapter-1-time" type="button" class="inline-flex rounded-full border border-brand-sand bg-white/90 px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-soft transition hover:border-brand-coral hover:text-brand-clay">Ulang dari Scene 1</button>
+            </div>
+            <h1 class="mt-6 max-w-3xl font-display text-4xl leading-tight sm:text-6xl">Cerita Kita Hari Ini</h1>
+            <p class="mt-4 max-w-3xl text-brand-soft">Terima kasih sudah membaca sampai selesai. Halaman ini jadi penutup kecil untuk merangkum perjalanan dari scene 1 sampai scene 7.</p>
+        </header>
+
+        <section class="reveal mt-5 grid gap-5 lg:grid-cols-2">
+            <article class="rounded-[2rem] border border-white/70 bg-white/78 p-6 shadow-card backdrop-blur-md sm:p-8">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-clay">Highlight</p>
+                <ul class="mt-4 space-y-3 text-sm leading-7 text-brand-soft">
+                    <li>Scene 1: mulai dari waktu yang terus kita jaga bersama.</li>
+                    <li>Scene 2-3: menengok momen dan foto yang paling berkesan.</li>
+                    <li>Scene 4-5: alasan sayang dan kupon kecil yang playful.</li>
+                    <li>Scene 6-7: video dan surat penutup yang paling personal.</li>
+                </ul>
+            </article>
+            <article class="rounded-[2rem] border border-white/70 bg-white/78 p-6 shadow-card backdrop-blur-md sm:p-8">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-clay">Penutup</p>
+                <p class="mt-4 text-sm leading-7 text-brand-soft">Kalau kamu mau, kita bisa putar lagi dari awal atau berhenti di halaman ini sambil dengerin musiknya terus. Cerita ini akan selalu jadi tempat pulang kecil untuk kita berdua.</p>
+                <div class="mt-6">
+                    <button data-unlock-next data-next-page="chapter-1-time" type="button" class="w-full rounded-2xl bg-gradient-to-br from-brand-coral to-brand-clay px-6 py-3 text-sm font-bold tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft">Mulai Lagi dari Scene 1</button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

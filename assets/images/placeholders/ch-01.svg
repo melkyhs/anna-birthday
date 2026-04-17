@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE7D7"/>
+      <stop offset="1" stop-color="#FFD3E1"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#g1)"/>
+  <circle cx="760" cy="120" r="140" fill="#FFFFFF" fill-opacity="0.35"/>
+  <circle cx="220" cy="420" r="160" fill="#FFFFFF" fill-opacity="0.25"/>
+  <text x="64" y="420" fill="#8A5B6D" font-family="Georgia, serif" font-size="68" font-weight="700">Time Capsule</text>
+</svg>

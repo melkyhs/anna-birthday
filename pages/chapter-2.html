@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2 - Gallery Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Instrument Sans', 'sans-serif'],
+                        display: ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            cream: '#fffaf9',
+                            sand: '#f9e8ee',
+                            peach: '#ffd9df',
+                            coral: '#eea7be',
+                            clay: '#db819f',
+                            ink: '#45383d',
+                            soft: '#8a747c',
+                            apricot: '#ffe0cf',
+                            butter: '#fff1d6',
+                            mint: '#dff2e9'
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 18px 40px rgba(161, 104, 128, 0.18)',
+                        card: '0 10px 24px rgba(161, 104, 128, 0.13)'
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-story-page="chapter-2-gallery" class="page-theme-chapter-2-gallery bg-brand-cream font-sans text-brand-ink antialiased selection:bg-brand-peach/50">
+    <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div class="absolute -left-24 -top-20 h-72 w-72 rounded-full bg-brand-peach/34 blur-3xl"></div>
+        <div class="absolute -right-28 top-1/3 h-96 w-96 rounded-full bg-brand-apricot/50 blur-3xl"></div>
+        <div class="absolute bottom-[-8rem] left-1/4 h-80 w-80 rounded-full bg-brand-mint/30 blur-3xl"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(47,36,31,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(47,36,31,0.04)_1px,transparent_1px)] bg-[size:34px_34px]"></div>
+    </div>
+
+    <div id="music-container" class="fixed right-4 top-4 z-50 sm:right-6 sm:top-6">
+        <button id="music-btn" type="button" aria-label="Putar musik latar" class="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-3 py-2 text-xs font-bold uppercase tracking-wide text-brand-ink shadow-card backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white">
+            <span class="music-pill-icon grid h-6 w-6 place-items-center rounded-full bg-brand-peach/40 text-brand-clay">♫</span>
+            <span class="music-pill-text">Play soundtrack</span>
+        </button>
+        <audio id="bg-music" loop preload="auto">
+            <source src="../assets/audio/Lihat%20Kebunku%20(Taman%20Bunga)%20-%20Aku%20Jeje%20%20Lirik%20Lagu%20-%20Indolirik.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <main id="main-scrapbook" class="mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+        <header class="reveal rounded-[2rem] border border-white/70 bg-white/76 p-6 shadow-soft backdrop-blur-xl sm:p-8 lg:p-10">
+            <div class="flex flex-wrap items-center justify-end gap-3">
+                <span class="rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-clay">Scene 3 / 7</span>
+            </div>
+            <h1 class="mt-6 max-w-3xl font-display text-4xl leading-tight sm:text-6xl">Gallery Room</h1>
+            <p class="mt-4 max-w-3xl text-brand-soft">Album ini dibikin seperti ruang pameran kecil. Foto-fotonya masih bisa dibuka satu per satu, tapi kemasannya sekarang lebih seperti pengalaman kurasi.</p>
+        </header>
+
+        <section class="reveal mt-5 grid gap-5 lg:grid-cols-[0.92fr_1.08fr]">
+            <aside class="rounded-[2rem] border border-white/70 bg-white/78 p-6 shadow-card backdrop-blur-md sm:p-8 lg:sticky lg:top-24 lg:h-fit">
+                <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-clay">Gallery Notes</p>
+                <h2 class="mt-3 font-display text-3xl sm:text-4xl">Momen yang sengaja dipajang</h2>
+                <p class="mt-4 text-sm leading-7 text-brand-soft">Daripada card grid yang biasa, halaman ini dibuat seperti ruang galeri privat. Foto-foto diatur sebagai pameran kecil supaya user merasa sedang masuk ke album yang disusun dengan niat.</p>
+                <div class="mt-6 rounded-3xl border border-brand-sand bg-brand-cream/80 p-4">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-soft">Cara baca</p>
+                    <p class="mt-2 text-xs leading-6 text-brand-soft">Klik salah satu foto untuk membuka lightbox. Gunakan panah kiri-kanan kalau ingin pindah antar memori.</p>
+                </div>
+                <button data-unlock-next data-next-page="chapter-3-reasons" type="button" class="mt-6 w-full rounded-2xl bg-gradient-to-br from-brand-coral to-brand-clay px-6 py-3 text-sm font-bold tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft">Lanjut ke Reasons Page</button>
+            </aside>
+
+            <section class="rounded-[2rem] border border-white/70 bg-white/78 p-6 shadow-card backdrop-blur-md sm:p-8">
+                <div class="flex flex-col gap-2">
+                    <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-clay">Exhibit 03</p>
+                    <h2 class="font-display text-3xl sm:text-4xl">Momen yang Paling Kita Simpan</h2>
+                </div>
+                <div class="gallery-container mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    <article class="photo-card overflow-hidden rounded-[1.5rem] border border-brand-sand bg-white shadow-card" style="--tilt: -2.5deg;" role="button" tabindex="0" aria-label="Buka foto First Sweet Escape">
+                        <img src="https://picsum.photos/500/620?random=41" alt="Memory 1">
+                        <div class="caption-wrap p-3">
+                            <h3 class="text-sm font-bold">First Sweet Escape</h3>
+                            <p class="caption text-xs text-brand-soft">Momen sederhana yang jadi favorit.</p>
+                        </div>
+                    </article>
+                    <article class="photo-card overflow-hidden rounded-[1.5rem] border border-brand-sand bg-white shadow-card" style="--tilt: 2deg;" role="button" tabindex="0" aria-label="Buka foto Our Weekend">
+                        <img src="https://picsum.photos/500/620?random=42" alt="Memory 2">
+                        <div class="caption-wrap p-3">
+                            <h3 class="text-sm font-bold">Our Weekend</h3>
+                            <p class="caption text-xs text-brand-soft">Tawa random yang selalu keinget.</p>
+                        </div>
+                    </article>
+                    <article class="photo-card overflow-hidden rounded-[1.5rem] border border-brand-sand bg-white shadow-card" style="--tilt: -1.5deg;" role="button" tabindex="0" aria-label="Buka foto Sunny Date">
+                        <img src="https://picsum.photos/500/620?random=43" alt="Memory 3">
+                        <div class="caption-wrap p-3">
+                            <h3 class="text-sm font-bold">Sunny Date</h3>
+                            <p class="caption text-xs text-brand-soft">Hari yang rasanya cepat banget lewat.</p>
+                        </div>
+                    </article>
+                    <article class="photo-card overflow-hidden rounded-[1.5rem] border border-brand-sand bg-white shadow-card" style="--tilt: 2.5deg;" role="button" tabindex="0" aria-label="Buka foto One More Memory">
+                        <img src="https://picsum.photos/500/620?random=44" alt="Memory 4">
+                        <div class="caption-wrap p-3">
+                            <h3 class="text-sm font-bold">One More Memory</h3>
+                            <p class="caption text-xs text-brand-soft">Dan ini belum setengah dari cerita kita.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="gallery-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="gallery-title">
+        <div class="modal-overlay" id="gallery-close-overlay"></div>
+        <article class="gallery-lightbox relative z-[2] w-[min(900px,94vw)] overflow-hidden rounded-3xl border border-brand-sand bg-white shadow-soft">
+            <button id="gallery-close-btn" class="absolute right-3 top-2 z-[3] text-4xl leading-none text-brand-soft transition hover:text-brand-clay" type="button" aria-label="Tutup galeri">&times;</button>
+            <div class="relative bg-brand-cream">
+                <img id="gallery-modal-image" src="" alt="Gallery preview" class="h-auto w-full max-h-[68vh] object-contain">
+                <button id="gallery-prev-btn" class="gallery-nav-btn absolute left-3 top-1/2 -translate-y-1/2" type="button" aria-label="Foto sebelumnya">&#10094;</button>
+                <button id="gallery-next-btn" class="gallery-nav-btn absolute right-3 top-1/2 -translate-y-1/2" type="button" aria-label="Foto berikutnya">&#10095;</button>
+            </div>
+            <div class="space-y-1 border-t border-brand-sand/70 p-4">
+                <h3 id="gallery-title" class="font-display text-2xl text-brand-ink">Memory</h3>
+                <p id="gallery-caption" class="text-sm text-brand-soft"></p>
+            </div>
+        </article>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

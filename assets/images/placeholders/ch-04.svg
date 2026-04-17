@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE9F1"/>
+      <stop offset="1" stop-color="#FFF4D7"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#g4)"/>
+  <circle cx="240" cy="200" r="110" fill="#FFFFFF" fill-opacity="0.45"/>
+  <circle cx="430" cy="260" r="80" fill="#FFFFFF" fill-opacity="0.35"/>
+  <circle cx="620" cy="170" r="120" fill="#FFFFFF" fill-opacity="0.3"/>
+  <text x="64" y="470" fill="#8A5B6D" font-family="Georgia, serif" font-size="64" font-weight="700">Reasons</text>
+</svg>
