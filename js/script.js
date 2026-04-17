@@ -147,6 +147,78 @@ const reasons = [
     "Karena jatuh cinta ke kamu itu keputusan favoritku."
 ];
 
+const COUPLE_PHOTO_POOL = Array.from(
+    { length: 14 },
+    (_, index) => `assets/photos/us${index + 1}.jpeg`
+);
+
+const PERSONAL_PHOTO_POOL = [
+    ...COUPLE_PHOTO_POOL,
+    "assets/photos/anna.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.52 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.52 (2).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.53.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.53 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.54.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.54 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.55.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.55 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.55 (2).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.56.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.56 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.56 (2).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.57.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.57 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.58.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.58 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.59.jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.59 (1).jpeg",
+    "assets/photos/WhatsApp Image 2026-04-17 at 21.32.59 (2).jpeg"
+];
+
+const COUPLE_ONLY_CHAPTER_IDS = new Set([
+    "chapter-1-time",
+    "chapter-1-timeline",
+    "chapter-2-gallery",
+    "chapter-3-reasons"
+]);
+
+function getNextPersonalPhoto(exceptSrc = "") {
+    const candidates = PERSONAL_PHOTO_POOL.filter((path) => !exceptSrc.includes(path));
+    if (!candidates.length) {
+        return PERSONAL_PHOTO_POOL[Math.floor(Math.random() * PERSONAL_PHOTO_POOL.length)];
+    }
+    return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function getNextCouplePhoto(exceptSrc = "") {
+    const candidates = COUPLE_PHOTO_POOL.filter((path) => !exceptSrc.includes(path));
+    if (!candidates.length) {
+        return COUPLE_PHOTO_POOL[Math.floor(Math.random() * COUPLE_PHOTO_POOL.length)];
+    }
+    return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function getNextUniquePhotoFromPool(pool, exceptSrc = "", occupiedSrcSet = new Set()) {
+    const candidates = pool.filter((path) => {
+        if (exceptSrc.includes(path)) {
+            return false;
+        }
+        return !occupiedSrcSet.has(path);
+    });
+
+    if (candidates.length) {
+        return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    const fallback = pool.filter((path) => !exceptSrc.includes(path));
+    if (fallback.length) {
+        return fallback[Math.floor(Math.random() * fallback.length)];
+    }
+
+    return pool[Math.floor(Math.random() * pool.length)];
+}
+
 function getStoryPageIndex(pageId) {
     return STORY_ORDER.indexOf(pageId);
 }
@@ -421,28 +493,6 @@ function initLovePhotoShuffle() {
         return;
     }
 
-    const photoPool = [
-        "assets/photos/us1.jpeg",
-        "assets/photos/us2.jpeg",
-        "assets/photos/anna.jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.23.jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.23 (1).jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.24 (1).jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.25.jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.25 (1).jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.26.jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.26 (1).jpeg",
-        "assets/photos/WhatsApp Image 2026-04-17 at 20.57.27.jpeg"
-    ];
-
-    const getNextPhoto = (exceptSrc) => {
-        const candidates = photoPool.filter((path) => !exceptSrc.includes(path));
-        if (!candidates.length) {
-            return photoPool[Math.floor(Math.random() * photoPool.length)];
-        }
-        return candidates[Math.floor(Math.random() * candidates.length)];
-    };
-
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return;
     }
@@ -455,11 +505,103 @@ function initLovePhotoShuffle() {
 
         target.classList.add("is-swapping");
         window.setTimeout(() => {
-            const nextSrc = getNextPhoto(target.getAttribute("src") || "");
+            const nextSrc = getNextPersonalPhoto(target.getAttribute("src") || "");
             target.setAttribute("src", nextSrc);
             target.classList.remove("is-swapping");
         }, 320);
     }, 5200);
+}
+
+function initStoryCoverShuffle() {
+    const storyCoverNodes = Array.from(document.querySelectorAll(".story-grid .story-cover"));
+    if (!storyCoverNodes.length) {
+        return;
+    }
+
+    const getChapterId = (coverNode) => {
+        const card = coverNode.closest("[data-story-target]");
+        return card ? card.getAttribute("data-story-target") || "" : "";
+    };
+
+    const getPoolForChapter = (chapterId) => {
+        return COUPLE_ONLY_CHAPTER_IDS.has(chapterId) ? COUPLE_PHOTO_POOL : PERSONAL_PHOTO_POOL;
+    };
+
+    const getOccupiedCoverSources = (excludeNode = null) => {
+        const occupied = new Set();
+        storyCoverNodes.forEach((coverNode) => {
+            if (excludeNode && coverNode === excludeNode) {
+                return;
+            }
+
+            const src = coverNode.getAttribute("src") || "";
+            if (!src) {
+                return;
+            }
+
+            occupied.add(src);
+        });
+        return occupied;
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+
+    const orderedNodes = [...storyCoverNodes].sort((first, second) => {
+        const firstChapter = getChapterId(first);
+        const secondChapter = getChapterId(second);
+        const firstCouple = COUPLE_ONLY_CHAPTER_IDS.has(firstChapter);
+        const secondCouple = COUPLE_ONLY_CHAPTER_IDS.has(secondChapter);
+        if (firstCouple === secondCouple) {
+            return 0;
+        }
+        return firstCouple ? -1 : 1;
+    });
+
+    storyCoverNodes.forEach((cover) => {
+        const chapterId = getChapterId(cover);
+        const pool = getPoolForChapter(chapterId);
+        const currentSrc = cover.getAttribute("src") || "";
+        const occupied = getOccupiedCoverSources(cover);
+        const isCurrentInPool = pool.some((path) => currentSrc.includes(path));
+        const isCurrentUnique = !occupied.has(currentSrc);
+
+        if (isCurrentInPool && isCurrentUnique) {
+            return;
+        }
+
+        const nextSrc = getNextUniquePhotoFromPool(pool, currentSrc, occupied);
+        cover.setAttribute("src", nextSrc);
+    });
+
+    orderedNodes.forEach((cover) => {
+        const chapterId = getChapterId(cover);
+        const pool = getPoolForChapter(chapterId);
+        const occupied = getOccupiedCoverSources(cover);
+        const currentSrc = cover.getAttribute("src") || "";
+        if (!currentSrc || occupied.has(currentSrc)) {
+            cover.setAttribute("src", getNextUniquePhotoFromPool(pool, currentSrc, occupied));
+        }
+    });
+
+    window.setInterval(() => {
+        const target = storyCoverNodes[Math.floor(Math.random() * storyCoverNodes.length)];
+        if (!target) {
+            return;
+        }
+
+        const chapterId = getChapterId(target);
+        const pool = getPoolForChapter(chapterId);
+        const occupied = getOccupiedCoverSources(target);
+        const nextSrc = getNextUniquePhotoFromPool(pool, target.getAttribute("src") || "", occupied);
+
+        target.classList.add("is-swapping");
+        window.setTimeout(() => {
+            target.setAttribute("src", nextSrc);
+            target.classList.remove("is-swapping");
+        }, 280);
+    }, 4600);
 }
 
 function initScrollDynamics() {
@@ -1326,6 +1468,7 @@ if (storyPage === "intro") {
 updateStoryLinkState();
 initAmbientMotionLayer();
 initLovePhotoShuffle();
+initStoryCoverShuffle();
 initScrollDynamics();
 initTactileFeedback();
 initAtlasParallax();

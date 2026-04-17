@@ -63,6 +63,12 @@ body {
     transform: scale(1.04);
 }
 
+.story-cover.is-swapping {
+    opacity: 0.24;
+    transform: scale(1.03);
+    transition: opacity 0.28s ease, transform 0.4s ease;
+}
+
 .love-photo-card::after {
     content: "";
     position: absolute;
