@@ -176,6 +176,8 @@ const PERSONAL_PHOTO_POOL = [
     "assets/photos/WhatsApp Image 2026-04-17 at 21.32.59 (2).jpeg"
 ];
 
+const OTHER_PHOTO_POOL = PERSONAL_PHOTO_POOL.filter((path) => !COUPLE_PHOTO_POOL.includes(path));
+
 const COUPLE_ONLY_CHAPTER_IDS = new Set([
     "chapter-1-time",
     "chapter-1-timeline",
@@ -217,6 +219,23 @@ function getNextUniquePhotoFromPool(pool, exceptSrc = "", occupiedSrcSet = new S
     }
 
     return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function getNextFrontPagePhoto(exceptSrc = "") {
+    const useCouplePhoto = Math.random() < 0.8;
+    const pool = useCouplePhoto ? COUPLE_PHOTO_POOL : OTHER_PHOTO_POOL;
+    const candidates = pool.filter((path) => !exceptSrc.includes(path));
+
+    if (candidates.length) {
+        return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    const fallback = PERSONAL_PHOTO_POOL.filter((path) => !exceptSrc.includes(path));
+    if (fallback.length) {
+        return fallback[Math.floor(Math.random() * fallback.length)];
+    }
+
+    return PERSONAL_PHOTO_POOL[Math.floor(Math.random() * PERSONAL_PHOTO_POOL.length)];
 }
 
 function getStoryPageIndex(pageId) {
@@ -505,7 +524,7 @@ function initLovePhotoShuffle() {
 
         target.classList.add("is-swapping");
         window.setTimeout(() => {
-            const nextSrc = getNextPersonalPhoto(target.getAttribute("src") || "");
+            const nextSrc = getNextFrontPagePhoto(target.getAttribute("src") || "");
             target.setAttribute("src", nextSrc);
             target.classList.remove("is-swapping");
         }, 320);
