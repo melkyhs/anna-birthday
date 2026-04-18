@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For You, Anna 💌</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="overflow-hidden flex items-center justify-center min-h-[100dvh] m-0 touch-pan-x touch-pan-y relative bg-[#fffdf9]">
+
+    <canvas id="magic-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+    
+    <div class="reading-backdrop"></div>
+
+    <div class="scene w-full h-full flex items-center justify-center relative z-10 perspective-[1000px]">
+        
+        <div id="float-wrapper" class="float-wrapper">
+            <div class="tooltip font-sans" style="display: none;"></div>
+            <div id="envelope-wrapper" class="envelope-wrapper relative cursor-pointer z-10" onclick="toggleMail()">
+                
+                <div class="envelope relative shadow-xl rounded-md w-[340px] h-[230px] sm:w-[400px] sm:h-[260px] shrink-0" style="background-color: var(--env-bg-inner);">
+
+                    <div id="letter" class="letter">
+                        <div class="letter-content-wrapper custom-scrollbar">
+                            <div class="date text-right text-[0.8rem] text-[#c2185b] mb-2 tracking-widest uppercase opacity-60 font-sans">
+                                19 April 2026
+                            </div>
+                            <div class="fade-text pb-10">
+                                <h1 class="text-3xl sm:text-4xl font-bold mb-6 text-center leading-tight" style="color: #c2185b;">
+                                    Happy Birthday, Maulina Aprilia ✤
+                                </h1>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Hai Bby,
+                                </p>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Di hari ulang tahun kamu ini, aku mau bilang satu hal yang paling penting: kamu adalah orang yang paling pengen aku rayain ulang tahunnya.
+                                </p>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Aku tau kamu sering takut kalau ulang tahun kamu datang tapi ga ada yang bener-bener rayain. Takut hari itu lewat gitu aja, seolah ga ada yang nungguin tanggal itu.
+                                </p>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Sekarang tenang aja ya. Mulai sekarang, akan selalu ada orang yang merayakan ulang tahun kamu. Ada orang yang siap bikin hari ini kerasa spesial, ada orang yang selalu dengerin kamu, dan bikin kamu ngerasa dipilih.
+                                </p>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Kamu pantas dirayakan, bukan cuma karena kamu bertambah usia, tapi karena kamu adalah kamu yang baik sama semua orang, punya hati, kuat dan tulus.
+                                </p>
+                                <p class="mb-4 text-gray-800 leading-relaxed">
+                                    Selamat ulang tahun, sayang. Semoga semua hal baik datang ke kamu satu per satu, semua doa-doa, semua harapan kamu semua terwujud dan semoga aku tetap jadi bagian dari cerita bahagia kamu.
+                                </p>
+
+                                <div class="text-right">
+                                    <p class="text-2xl font-bold pb-2" style="color: #c2185b;">
+                                        With all my love,
+                                    </p>
+                                    <p class="text-[1.5rem] font-bold" style="color: #c2185b;">
+                                        Melky      
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fold left-fold z-[3]"></div>
+                    <div class="fold right-fold z-[3]"></div>
+                    <div class="fold bottom-fold z-[4]"></div>
+                    <div id="top-flap" class="fold top-fold z-[5] drop-shadow-md origin-top transition-transform duration-700 ease-in-out"></div>
+
+                    <div id="seal" class="seal absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[10px] w-[60px] h-[60px] rounded-full z-[6] flex/items-center justify-center transition-all duration-300 shadow-xl cursor-pointer">
+                            <img src="data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='48' fill='%23c2185b'/><circle cx='50' cy='50' r='40' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-dasharray='4,4' opacity='0.5'/><path d='M50 30 C50 30 30 20 20 40 C10 60 40 70 50 85 C60 70 90 60 80 40 C70 20 50 30 50 30' fill='%23ffffff' opacity='0.9'/></svg>" class="w-full h-full object-container pointer-events-none drop-shadow-md ">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shadow-caster"></div>
+        </div>
+
+        <div id="close-btn" style="display: none;"></div>
+
+    </div>
+
+    <!-- Audios for Effects -->
+    <audio id="audio-pop" src="https://assets.mixkit.co/sfx/preview/mixkit-bubble-pop-up-14.mp3"></audio>
+    <audio id="audio-paper" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1509.mp3"></audio>
+    <audio id="audio-bgm" src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

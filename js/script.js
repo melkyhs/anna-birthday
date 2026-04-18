@@ -8,7 +8,6 @@ const PAGE_TRANSITION_MS = 420;
 const SCENE_ENTER_MS = 620;
 const STORY_PAGES = [
     { id: "chapter-1-time", href: "chapter-1.html" },
-    { id: "chapter-1-timeline", href: "chapter-1-timeline.html" },
     { id: "chapter-2-gallery", href: "chapter-2.html" },
     { id: "chapter-3-reasons", href: "chapter-3.html" },
     { id: "chapter-3-coupons", href: "chapter-3-coupons.html" },
@@ -16,8 +15,7 @@ const STORY_PAGES = [
     { id: "chapter-4-letter", href: "chapter-4-letter.html" }
 ];
 const STORY_OVERVIEW = [
-    { id: "chapter-1-time", label: "Time Capsule", summary: "Pembuka waktu dan detak cerita." },
-    { id: "chapter-1-timeline", label: "Timeline Page", summary: "Urutan momen yang membentuk kita." },
+    { id: "chapter-1-time", label: "Time Capsule", summary: "Awal kenal, chat pertama, dan detak cerita." },
     { id: "chapter-2-gallery", label: "Gallery Page", summary: "Foto-foto yang menyimpan suasana." },
     { id: "chapter-3-reasons", label: "Reasons Page", summary: "Alasan-alasan kecil yang tetap hangat." },
     { id: "chapter-3-coupons", label: "Coupon Deck", summary: "Hadiah kecil yang bisa diklaim." },
@@ -135,16 +133,29 @@ const galleryItems = galleryCards.map((card) => {
 });
 
 const reasons = [
-    "Karena setiap hari terasa lebih ringan saat ada kamu.",
-    "Karena kamu selalu tahu cara bikin aku tenang lagi.",
-    "Karena kamu itu rumah paling hangat yang aku punya.",
-    "Karena kita bisa ngobrol random berjam-jam tanpa bosan.",
-    "Karena kamu dukung aku bahkan di hari paling berantakan.",
-    "Karena sama kamu, hal sederhana pun terasa mewah.",
-    "Karena kamu bikin aku percaya cinta bisa sesederhana ini.",
-    "Karena kamu tetap milih aku, lagi dan lagi.",
-    "Karena aku suka versi terbaik diriku saat bersamamu.",
-    "Karena jatuh cinta ke kamu itu keputusan favoritku."
+    "Karena kamu tulus sama aku? kadang aku ngerasa kamu deserve semua hal baik dari aku. Makanya aku juga pengen kasih yang terbaik ke kamu aku juga belajar jadi versi terbaik biar kita sama sama nyaman",
+    "Karena kamu ga cuma nuntut buat aku jadi lebih baik, kamu juga pengen jadi the best version of you. Makasih ya",
+    "Sesibuk apapun kamu, kamu ga pernah lupa aku. Tapi aku juga pengen kamu lebih peduli lagi sama diri kamu sendiri ya",
+    "Sekarang kamu benar benar belajar buat tenang, dan getting better for sure thank u bby",
+    "Karena kamu benar benar mau take care aku tanpa ngerasa direndahkan, makasi yaa",
+    "Karena kamu bikin aku percaya hubungan sehat itu mungkin, asal dua-duanya mau belajar.",
+    "Karena kamu udah bukan Anna yang dulu, yang selalu mengekang mantan mantan kamu",
+    "Karena waktu aku cape, kamu ga nuntut aku jadi sempurna, kamu cuma nemenin aku pas lagi ga baik baik aja.",
+    "Karena kamu yang ngajarin aku cara sayang itu gimana",
+    "Karena kamu yang ngajarin aku biar tau apa yang aku rasain sekarang",
+    "Karena semua hal banyak pertama kali aku lakuin sama kamu",
+    "Karena sekarang kamu bener bener menjaga mood kamu buat aku pas aku lagi cape padahal kamu juga lagi pusing",
+    "Karena kamu paham sama keadaan aku sekarang, makasi yaaa",
+    "Karena aku bisa jadi apa aja sama kamu ga takut mau kaya gimana juga",
+    "Karena kamu selalu semangatin aku",
+    "Karena feminine energy kamu besar sekali",
+    "Karena kamu tetap milih aku, lagi dan lagi, bahkan di hari yang aku paling menyebalkan",
+    "Karena kamu paham saat aku lagi sibuk, contoh kerja. Kamu bener bener mau pahamin itu. Makasi cintah",
+    "Karena kamu selalu bikin aku nyaman pas ketemu?",
+    "Karena kamu konsisten",
+    "Karena kamu mau terima jokes aku yang aneh gitu wakakakakaakak",
+    "Karena selalu tanyain aku, udah sampe rumah apa belum?",
+    "Karena selalu ngasih semuanya, rasa sayang rasa nyaman tanpa gengsi. Makaciwww cintah"
 ];
 
 const COUPLE_PHOTO_POOL = Array.from(
@@ -180,9 +191,9 @@ const OTHER_PHOTO_POOL = PERSONAL_PHOTO_POOL.filter((path) => !COUPLE_PHOTO_POOL
 
 const COUPLE_ONLY_CHAPTER_IDS = new Set([
     "chapter-1-time",
-    "chapter-1-timeline",
     "chapter-2-gallery",
-    "chapter-3-reasons"
+    "chapter-3-reasons",
+    "chapter-3-coupons"
 ]);
 
 function getNextPersonalPhoto(exceptSrc = "") {
@@ -315,6 +326,10 @@ function resolveStoryPageIdFromHref(href) {
         return match.id;
     }
 
+    if (normalizedHref.endsWith("chapter-1-timeline.html")) {
+        return "chapter-1-time";
+    }
+
     if (normalizedHref.endsWith("ringkasan.html")) {
         return "hub-summary";
     }
@@ -325,7 +340,6 @@ function resolveStoryPageIdFromHref(href) {
 function getTransitionCharacterClass(pageId) {
     const transitionMap = {
         "chapter-1-time": "scene-trans-memory",
-        "chapter-1-timeline": "scene-trans-memory",
         "chapter-2-gallery": "scene-trans-gallery",
         "chapter-3-reasons": "scene-trans-playful",
         "chapter-3-coupons": "scene-trans-playful",
@@ -604,8 +618,15 @@ function initStoryCoverShuffle() {
         }
     });
 
-    window.setInterval(() => {
-        const target = storyCoverNodes[Math.floor(Math.random() * storyCoverNodes.length)];
+    const coupleCoverNodes = storyCoverNodes.filter((cover) => {
+        return COUPLE_ONLY_CHAPTER_IDS.has(getChapterId(cover));
+    });
+
+    const nonCoupleCoverNodes = storyCoverNodes.filter((cover) => {
+        return !COUPLE_ONLY_CHAPTER_IDS.has(getChapterId(cover));
+    });
+
+    const swapCoverImage = (target, durationMs = 280) => {
         if (!target) {
             return;
         }
@@ -619,7 +640,18 @@ function initStoryCoverShuffle() {
         window.setTimeout(() => {
             target.setAttribute("src", nextSrc);
             target.classList.remove("is-swapping");
-        }, 280);
+        }, durationMs);
+    };
+
+    // Couple chapters get faster updates so us1-us14 feel more varied.
+    window.setInterval(() => {
+        const target = coupleCoverNodes[Math.floor(Math.random() * coupleCoverNodes.length)];
+        swapCoverImage(target, 260);
+    }, 3000);
+
+    window.setInterval(() => {
+        const target = nonCoupleCoverNodes[Math.floor(Math.random() * nonCoupleCoverNodes.length)];
+        swapCoverImage(target, 280);
     }, 4600);
 }
 
@@ -1116,7 +1148,7 @@ function pad(value) {
 function setMusicState(isPlaying) {
     isMusicPlaying = isPlaying;
     if (musicLabel) {
-        musicLabel.textContent = isPlaying ? "Pause soundtrack" : "Play soundtrack";
+        musicLabel.textContent = isPlaying ? "Pause music" : "Play music";
     }
     if (musicIcon) {
         musicIcon.textContent = isPlaying ? "▮▮" : "♫";

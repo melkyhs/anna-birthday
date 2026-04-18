@@ -98,17 +98,11 @@
     </div>
 
     <main id="main-scrapbook" class="screen hidden mx-auto w-full max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-        <header class="reveal hero-tint rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-soft backdrop-blur-xl sm:p-10">
-            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-clay">Story Prelude</p>
-            <h1 class="mt-3 max-w-3xl font-display text-4xl leading-tight sm:text-6xl">Cerita ini akan berjalan sendiri.</h1>
-            <p class="mt-4 max-w-3xl text-brand-soft">Saat gate terbuka, kamu akan langsung dibawa ke scene 1 tanpa perlu klik apa pun. Di sini cuma ada suasana pembuka dan penanda bahwa tujuh scene sudah menunggu.</p>
-        </header>
-
-        <section class="reveal mt-5 overflow-hidden rounded-[1.8rem] border border-white/70 bg-white/75 shadow-card backdrop-blur-md">
+        <section class="reveal overflow-hidden rounded-[1.8rem] border border-white/70 bg-white/75 shadow-card backdrop-blur-md">
             <div class="flex items-center justify-between gap-3 border-b border-brand-sand/70 px-5 py-4 sm:px-6">
                 <div>
                     <p class="text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-clay">Story Shell</p>
-                    <p class="text-xs text-brand-soft">Soundtrack tetap hidup di sini, scene berganti di dalam halaman yang sama.</p>
+                    <p class="text-xs text-brand-soft">Lagunya satu doang wakakaakak.</p>
                 </div>
                 <button id="reset-story-progress" type="button" class="rounded-full border border-brand-sand bg-white px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft transition hover:border-brand-coral hover:text-brand-clay">Reset Progress</button>
             </div>
@@ -119,13 +113,12 @@
 
         <section class="reveal mt-5 grid gap-5 lg:grid-cols-[0.94fr_1.06fr]">
             <article class="story-atlas-card rounded-[2rem] border border-white/70 p-6 shadow-card backdrop-blur-md sm:p-8">
-                <p class="text-[11px] font-extrabold uppercase tracking-[0.18em] text-brand-clay">Chapter Atlas</p>
-                <h2 class="mt-3 font-display text-3xl sm:text-4xl">Peta cerita yang bisa dibuka pelan-pelan</h2>
-                <p class="story-atlas-note mt-4 text-sm leading-7">Setiap kartu di samping mewakili satu chapter. Saat progress bertambah, statusnya ikut berubah dan kamu bisa lompat ke bagian cerita yang sudah terbuka.</p>
+                <p class="mt-4 text-[11px] font-extrabold uppercase tracking-[0.16em] text-brand-clay">Note</p>
+                <p class="story-atlas-note mt-2 text-sm leading-7">Bacanya pelan pelan aja, aku bikinnya lama :)</p>
 
                 <div class="chapter-pulse mt-6 rounded-[1.75rem] border border-brand-sand/70 p-4">
                     <div class="flex items-center justify-between gap-3">
-                        <span id="story-progress-text" class="text-sm font-bold text-brand-ink">0 dari 7 chapter masih terkunci</span>
+                        <span id="story-progress-text" class="text-sm font-bold text-brand-ink">0 dari 6 chapter masih terkunci</span>
                         <span class="rounded-full bg-white px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Progress</span>
                     </div>
                     <div class="story-progress-track mt-3 h-2 overflow-hidden rounded-full">
@@ -144,24 +137,10 @@
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
                         <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 1</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">01 / 07</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">01 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Time Capsule</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Pembuka waktu dan detak cerita.</p>
-                </a>
-
-                <a data-story-link data-story-target="chapter-1-timeline" href="pages/chapter-1-timeline.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Timeline Page">
-                    <div class="story-visual">
-                        <img class="story-cover" src="assets/photos/us2.jpeg" alt="Momen Timeline kalian">
-                        <span class="story-icon-badge">🗺️</span>
-                        <span class="story-mini">Mood: Journal</span>
-                    </div>
-                    <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 2</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">02 / 07</span>
-                    </div>
-                    <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Timeline Page</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Urutan momen yang membentuk kita.</p>
+                   
                 </a>
 
                 <a data-story-link data-story-target="chapter-2-gallery" href="pages/chapter-2.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Gallery Page">
@@ -171,11 +150,11 @@
                         <span class="story-mini">Mood: Snapshot</span>
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 3</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">03 / 07</span>
+                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 2</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">02 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Gallery Page</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Foto-foto yang menyimpan suasana.</p>
+                    
                 </a>
 
                 <a data-story-link data-story-target="chapter-3-reasons" href="pages/chapter-3.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Reasons Page">
@@ -185,11 +164,11 @@
                         <span class="story-mini">Mood: Soft Talk</span>
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 4</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">04 / 07</span>
+                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 3</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">03 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Reasons Page</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Alasan-alasan kecil yang tetap hangat.</p>
+                    
                 </a>
 
                 <a data-story-link data-story-target="chapter-3-coupons" href="pages/chapter-3-coupons.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Coupon Deck">
@@ -199,11 +178,11 @@
                         <span class="story-mini">Mood: Playful</span>
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 5</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">05 / 07</span>
+                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 4</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">04 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Coupon Deck</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Hadiah kecil yang bisa diklaim.</p>
+                    
                 </a>
 
                 <a data-story-link data-story-target="chapter-4-video" href="pages/chapter-4.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Video Theater">
@@ -213,11 +192,11 @@
                         <span class="story-mini">Mood: Cinematic</span>
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 6</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">06 / 07</span>
+                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 5</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">05 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Video Theater</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Momen spesial yang ditahan sampai akhir.</p>
+                    
                 </a>
 
                 <a data-story-link data-story-target="chapter-4-letter" href="pages/chapter-4-letter.html" class="story-link-card reveal rounded-[1.5rem] p-4 shadow-sm" aria-label="Buka chapter Letter Finale">
@@ -227,11 +206,11 @@
                         <span class="story-mini">Mood: Intimate</span>
                     </div>
                     <div class="mt-4 flex items-center justify-between gap-3">
-                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 7</span>
-                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">07 / 07</span>
+                        <span class="story-chip inline-flex rounded-full bg-brand-sand px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-soft">Chapter 6</span>
+                        <span class="story-meta text-[11px] font-bold uppercase tracking-[0.12em] text-brand-soft">06 / 06</span>
                     </div>
                     <h3 class="story-title mt-3 font-display text-2xl text-brand-ink">Letter Finale</h3>
-                    <p class="story-summary mt-2 text-sm leading-6">Penutup yang dibaca pelan.</p>
+                    
                 </a>
             </div>
         </section>
