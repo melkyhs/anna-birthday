@@ -308,10 +308,21 @@ function normalizeSceneHref(href) {
     let nextHref = href || "";
     if (/^https?:\/\//i.test(nextHref)) {
         const url = new URL(nextHref, window.location.href);
-        nextHref = url.pathname.replace(/^\//, "");
+        const pathname = url.pathname.replace(/^\//, "");
+        const pagesIndex = pathname.indexOf("pages/");
+        nextHref = pagesIndex >= 0 ? pathname.slice(pagesIndex) : pathname;
     }
 
-    nextHref = nextHref.replace(/^\.\//, "").replace(/^\.\.\//, "");
+    nextHref = nextHref.replace(/^\.\//, "");
+    while (nextHref.startsWith("../")) {
+        nextHref = nextHref.slice(3);
+    }
+
+    const pagesIndex = nextHref.indexOf("pages/");
+    if (pagesIndex > 0) {
+        nextHref = nextHref.slice(pagesIndex);
+    }
+
     if (!nextHref.startsWith("pages/")) {
         nextHref = `pages/${nextHref}`;
     }
