@@ -419,6 +419,82 @@ function extractSceneMarkup(html) {
     return fragment;
 }
 
+function resolveSceneRelativeUrl(value, baseUrl) {
+    if (!value) {
+        return value;
+    }
+
+    const trimmed = value.trim();
+    if (
+        !trimmed ||
+        trimmed.startsWith("#") ||
+        trimmed.startsWith("data:") ||
+        trimmed.startsWith("mailto:") ||
+        trimmed.startsWith("tel:") ||
+        trimmed.startsWith("javascript:") ||
+        trimmed.startsWith("blob:") ||
+        trimmed.startsWith("/")
+    ) {
+        return value;
+    }
+
+    try {
+        return new URL(trimmed, baseUrl).href;
+    } catch {
+        return value;
+    }
+}
+
+function rewriteSceneSrcSet(srcSetValue, baseUrl) {
+    if (!srcSetValue) {
+        return srcSetValue;
+    }
+
+    return srcSetValue
+        .split(",")
+        .map((entry) => {
+            const trimmedEntry = entry.trim();
+            if (!trimmedEntry) {
+                return "";
+            }
+
+            const parts = trimmedEntry.split(/\s+/);
+            const resourceUrl = parts.shift() || "";
+            const resolvedUrl = resolveSceneRelativeUrl(resourceUrl, baseUrl);
+
+            return [resolvedUrl, ...parts].join(" ").trim();
+        })
+        .filter(Boolean)
+        .join(", ");
+}
+
+function rewriteSceneFragmentUrls(fragment, sceneHref) {
+    const baseUrl = new URL(sceneHref, window.location.href);
+    const elements = fragment.querySelectorAll("[src], [href], [poster], [srcset]");
+
+    elements.forEach((element) => {
+        if (element.hasAttribute("src")) {
+            const value = element.getAttribute("src") || "";
+            element.setAttribute("src", resolveSceneRelativeUrl(value, baseUrl));
+        }
+
+        if (element.hasAttribute("href")) {
+            const value = element.getAttribute("href") || "";
+            element.setAttribute("href", resolveSceneRelativeUrl(value, baseUrl));
+        }
+
+        if (element.hasAttribute("poster")) {
+            const value = element.getAttribute("poster") || "";
+            element.setAttribute("poster", resolveSceneRelativeUrl(value, baseUrl));
+        }
+
+        if (element.hasAttribute("srcset")) {
+            const value = element.getAttribute("srcset") || "";
+            element.setAttribute("srcset", rewriteSceneSrcSet(value, baseUrl));
+        }
+    });
+}
+
 async function loadScenePage(href) {
     if (!sceneRoot || !href) {
         return;
@@ -442,6 +518,7 @@ async function loadScenePage(href) {
 
         const html = await response.text();
         const fragment = extractSceneMarkup(html);
+        rewriteSceneFragmentUrls(fragment, fetchHref);
         sceneRoot.innerHTML = "";
         sceneRoot.appendChild(fragment);
 
