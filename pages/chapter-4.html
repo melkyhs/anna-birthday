@@ -74,7 +74,7 @@
                 <p class="mt-4 text-sm leading-7 text-brand-soft">Ini jujur agak malu yah ges, tapi gapapa tonton ajah</p>
                 <div class="mt-6 rounded-3xl border border-brand-sand bg-brand-cream/80 p-4">
                     <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-soft">Aksi</p>
-                    <p class="mt-2 text-xs leading-6 text-brand-soft">Klik tombol buka video untuk mengganti teaser jadi player. Setelah itu, lanjut ke surat finale.</p>
+                    <p class="mt-2 text-xs leading-6 text-brand-soft">Klik tombol putar video untuk membuka player YouTube. Setelah selesai, lanjut ke surat finale.</p>
                 </div>
                 <button data-unlock-next data-next-page="chapter-4-letter" type="button" class="mt-6 w-full rounded-2xl bg-gradient-to-br from-brand-coral to-brand-clay px-6 py-3 text-sm font-bold tracking-wide text-white shadow-card transition hover:-translate-y-0.5 hover:shadow-soft">Lanjut ke Letter Finale</button>
             </aside>
@@ -87,17 +87,26 @@
                 </div>
                 <div id="video-teaser" class="video-teaser mt-6 overflow-hidden rounded-[1.75rem] border border-brand-sand bg-white shadow-card">
                     <div class="relative aspect-video">
-                        <img src="https://picsum.photos/960/540?random=45" alt="Teaser video" class="h-full w-full object-cover">
+                        <img src="https://img.youtube.com/vi/qLz88EIqvkY/hqdefault.jpg" alt="Thumbnail video spesial" class="h-full w-full object-cover">
                         <div class="video-overlay absolute inset-0 flex flex-col items-center justify-center gap-3 bg-brand-ink/48 p-4 text-center">
-                            <button id="reveal-video-btn" type="button" class="rounded-full bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-[0.16em] text-brand-clay transition hover:bg-brand-cream">Buka Video Spesial</button>
+                            <button id="reveal-video-btn" type="button" class="rounded-full bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-[0.16em] text-brand-clay transition hover:bg-brand-cream">Putar Video Spesial</button>
                         </div>
                     </div>
                 </div>
                 <div id="video-player-wrap" class="video-frame mt-6 hidden overflow-hidden rounded-[1.75rem] border border-brand-sand bg-white shadow-card">
-                    <video id="special-video" controls poster="https://picsum.photos/960/540?random=45" preload="metadata" class="w-full">
-                        <source src="../assets/audio/sample-video.mp4" type="video/mp4">
-                        Browser kamu belum mendukung video.
-                    </video>
+                    <div class="relative aspect-video w-full">
+                        <iframe
+                            id="special-video"
+                            data-youtube-embed="https://www.youtube.com/embed/qLz88EIqvkY?autoplay=1&rel=0"
+                            src=""
+                            title="Video spesial ulang tahun"
+                            loading="lazy"
+                            class="h-full w-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
                 </div>
             </section>
         </section>
