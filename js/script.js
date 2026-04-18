@@ -1,4 +1,3 @@
-const EARLY_ACCESS_PASSWORD = "anjaymabar123";
 const LOGIN_FADE_MS = 700;
 const RELATIONSHIP_START = new Date(2024, 10, 2, 20, 0, 0).getTime();
 const UNLOCK_AT_WITA = Date.UTC(2026, 3, 18, 16, 0, 0);
@@ -37,7 +36,6 @@ document.body.classList.add("enhanced");
 
 const loginScreen = document.getElementById("login-screen");
 const mainScrapbook = document.getElementById("main-scrapbook");
-const answerInput = document.getElementById("answer-input");
 const submitBtn = document.getElementById("submit-answer");
 const errorMessage = document.getElementById("error-message");
 const questionText = document.getElementById("question-text");
@@ -273,7 +271,7 @@ function hasStoredStoryGateUnlock() {
 }
 
 function isStoryGateOpen() {
-    return hasReachedUnlockTime() || hasStoredStoryGateUnlock();
+    return hasReachedUnlockTime();
 }
 
 function saveStoryProgress(index) {
@@ -590,7 +588,7 @@ function updateStoryLinkState() {
             ? (nextOverview
                 ? `Bab berikutnya: ${nextOverview.label} — ${nextOverview.summary}`
                 : "Semua chapter sudah terbuka.")
-            : "Masukkan kata sandi atau tunggu waktu buka untuk memulai.";
+            : "Web ini akan terbuka otomatis saat waktu unlock tiba.";
     }
 }
 
@@ -1587,18 +1585,20 @@ function syncLockGateState() {
 
     if (unlockStatusMessage) {
         unlockStatusMessage.textContent = unlockedByTime
-            ? "The time has arrived. You can open this without a password."
-            : "Enter the password to unlock earlier.";
+            ? "The time has arrived. You can open this now."
+            : "Belum waktunya dibuka. Tunggu countdown selesai ya.";
     }
 
     if (questionText) {
         questionText.textContent = unlockedByTime
             ? "Tap Unlock Gift to open"
-            : "Enter password (optional before unlock time)";
+            : "Gift hanya bisa dibuka saat waktu unlock tiba.";
     }
 
-    if (answerInput) {
-        answerInput.placeholder = unlockedByTime ? "Leave blank if you want" : "Password";
+    if (submitBtn) {
+        submitBtn.disabled = !unlockedByTime;
+        submitBtn.classList.toggle("opacity-70", !unlockedByTime);
+        submitBtn.classList.toggle("cursor-not-allowed", !unlockedByTime);
     }
 
     if (unlockedByTime && errorMessage) {
@@ -1607,33 +1607,25 @@ function syncLockGateState() {
 }
 
 function checkAnswer() {
-    if (!answerInput || !errorMessage) {
+    if (!errorMessage) {
         return;
     }
 
-    const unlockedByTime = hasReachedUnlockTime();
-    const userAnswer = answerInput.value.trim();
-    if (unlockedByTime || userAnswer === EARLY_ACCESS_PASSWORD) {
+    if (hasReachedUnlockTime()) {
         errorMessage.classList.remove("error-visible");
         revealMainView();
         return;
     }
 
     errorMessage.classList.add("error-visible");
-    answerInput.classList.add("shake");
-    window.setTimeout(() => answerInput.classList.remove("shake"), 340);
+    if (submitBtn) {
+        submitBtn.classList.add("shake");
+        window.setTimeout(() => submitBtn.classList.remove("shake"), 340);
+    }
 }
 
 if (submitBtn) {
     submitBtn.addEventListener("click", checkAnswer);
-}
-
-if (answerInput) {
-    answerInput.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            checkAnswer();
-        }
-    });
 }
 
 function tickUnlockCountdown() {
