@@ -197,6 +197,17 @@ body {
     filter: drop-shadow(0 6px 10px rgba(231, 158, 184, 0.32));
 }
 
+.birthday-confetti {
+    position: fixed;
+    top: -12vh;
+    z-index: 260;
+    pointer-events: none;
+    border-radius: 3px;
+    opacity: 0.96;
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    animation: birthdayConfettiFall var(--confetti-duration, 2.9s) cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+}
+
 .ambient-orb-layer {
     position: fixed;
     inset: 0;
@@ -259,6 +270,22 @@ body {
 @keyframes fall {
     to {
         transform: translate3d(var(--drift), 115vh, 0) rotate(280deg);
+    }
+}
+
+@keyframes birthdayConfettiFall {
+    0% {
+        transform: translate3d(0, -12vh, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate3d(var(--confetti-drift, 0px), 112vh, 0) rotate(var(--confetti-rotate, 540deg));
+        opacity: 0.92;
     }
 }
 

@@ -4,6 +4,7 @@ const RELATIONSHIP_START = new Date(2024, 10, 2, 20, 0, 0).getTime();
 const UNLOCK_AT_WITA = Date.UTC(2026, 3, 18, 16, 0, 0);
 const STORY_STORAGE_KEY = "anniv-story-progress-v1";
 const STORY_GATE_KEY = "anniv-story-gate-v1";
+const UNLOCK_CELEBRATION_KEY = "anniv-unlock-celebration-v1";
 const PAGE_TRANSITION_MS = 420;
 const SCENE_ENTER_MS = 620;
 const STORY_PAGES = [
@@ -116,6 +117,7 @@ let activeSceneTransitionClass = "";
 let hasScrollDynamicsBound = false;
 let hasTactileFeedbackBound = false;
 let hasAtlasParallaxBound = false;
+let hasUnlockCelebrationPlayed = window.sessionStorage.getItem(UNLOCK_CELEBRATION_KEY) === "1";
 
 const savedReasons = [];
 
@@ -1104,6 +1106,8 @@ if (storyPage === "intro" && loginScreen && !isStoryGateOpen()) {
     window.sessionStorage.removeItem(AUTO_MUSIC_KEY);
     window.sessionStorage.removeItem(MUSIC_STATE_KEY);
     window.sessionStorage.removeItem(MUSIC_MANUAL_PAUSE_KEY);
+    window.sessionStorage.removeItem(UNLOCK_CELEBRATION_KEY);
+    hasUnlockCelebrationPlayed = false;
     if (bgMusic) {
         bgMusic.pause();
         bgMusic.currentTime = 0;
@@ -1403,6 +1407,54 @@ function startHeartRain() {
     heartIntervalId = window.setInterval(createHeart, 420);
 }
 
+function spawnBirthdayConfettiBurst(pieceCount = 110) {
+    const colors = ["#f43f5e", "#fb7185", "#fbbf24", "#60a5fa", "#34d399", "#a78bfa", "#ffffff"];
+
+    for (let index = 0; index < pieceCount; index += 1) {
+        const confetti = document.createElement("span");
+        const size = Math.random() * 8 + 6;
+        const delay = Math.random() * 0.35;
+        const duration = Math.random() * 1.4 + 2.4;
+
+        confetti.className = "birthday-confetti";
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size * (Math.random() * 1.2 + 0.8)}px`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = `${delay.toFixed(2)}s`;
+        confetti.style.setProperty("--confetti-drift", `${Math.floor(Math.random() * 240 - 120)}px`);
+        confetti.style.setProperty("--confetti-rotate", `${Math.floor(Math.random() * 960 + 420)}deg`);
+        confetti.style.setProperty("--confetti-duration", `${duration.toFixed(2)}s`);
+
+        document.body.appendChild(confetti);
+
+        window.setTimeout(() => {
+            confetti.remove();
+        }, (duration + delay + 0.2) * 1000);
+    }
+}
+
+function startBirthdayConfettiShow() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+
+    spawnBirthdayConfettiBurst(120);
+    window.setTimeout(() => spawnBirthdayConfettiBurst(90), 320);
+    window.setTimeout(() => spawnBirthdayConfettiBurst(70), 720);
+}
+
+function triggerUnlockCelebration() {
+    if (hasUnlockCelebrationPlayed) {
+        return;
+    }
+
+    hasUnlockCelebrationPlayed = true;
+    window.sessionStorage.setItem(UNLOCK_CELEBRATION_KEY, "1");
+
+    startBirthdayConfettiShow();
+}
+
 function initRevealAnimations() {
     const revealTargets = document.querySelectorAll(".reveal");
     if (!revealTargets.length) {
@@ -1447,6 +1499,8 @@ function revealMainView() {
     }
 
     isMainViewRevealed = true;
+    triggerUnlockCelebration();
+
     if (!hasStoredStoryGateUnlock()) {
         storyUnlockedIndex = 0;
         saveStoryProgress(storyUnlockedIndex);
